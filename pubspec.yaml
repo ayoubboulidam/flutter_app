@@ -12,16 +12,21 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  http: ^1.0.0 # Updated to use a compatible version for Dart SDK 3.x
+  http: ^1.0.0
   cupertino_icons: ^1.0.8
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0 # Adjusted version to match project environment
+  flutter_lints: ^2.0.0
 
 flutter:
   uses-material-design: true
 
+  # Adding asset images for weather conditions
   assets:
-    - assets/a.jpg
+    - assets/images/clear_sky.jpg
+    - assets/images/rain.jpg
+    - assets/images/snow.jpg
+    - assets/images/cloudy.jpg
+    - assets/images/default.jpg
