@@ -17,6 +17,7 @@ class _WeatherPageState extends State<WeatherPage> {
   String _errorMessage = '';
   bool _showGif = false; // Determines whether to show the GIF
   String _countryName = ''; // Stores the updated country name
+  String? _weatherIcon; // URL for the weather icon
 
   // Fetch the weather data asynchronously
   Future<void> _getWeatherData() async {
@@ -25,6 +26,7 @@ class _WeatherPageState extends State<WeatherPage> {
       _errorMessage = '';
       _showGif = false;
       _countryName = '';
+      _weatherIcon = null;
     });
 
     String url =
@@ -45,6 +47,10 @@ class _WeatherPageState extends State<WeatherPage> {
             _countryName = _weatherData['sys']['country'];
             _showGif = false; // Do not show the GIF for other countries
           }
+
+          // Update weather icon URL
+          final iconCode = _weatherData['weather'][0]['icon'];
+          _weatherIcon = 'https://openweathermap.org/img/wn/$iconCode@2x.png';
 
           _isLoading = false;
         });
@@ -82,6 +88,17 @@ class _WeatherPageState extends State<WeatherPage> {
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.blueAccent),
             ),
           ),
+
+          // Weather Icon Section
+          if (_weatherIcon != null)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 20),
+              child: Image.network(
+                _weatherIcon!,
+                height: 100,
+                width: 100,
+              ),
+            ),
 
           // Main Content Section
           Expanded(
