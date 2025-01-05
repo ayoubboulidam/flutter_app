@@ -1,23 +1,29 @@
-// This is a basic Flutter widget test.
+// This is a basic Flutter widget test for the Weather App.
 //
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
+// It verifies the presence of key UI elements, simulates user interactions,
+// and includes placeholder comments for further enhancements like mocking API responses.
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:weather_app/main.dart';
+import 'package:weather_app/pages/weather.page.dart'; // Import the WeatherPage
 
 void main() {
-  testWidgets('Weather app smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const WeatherApp());
+  testWidgets('Weather app UI test', (WidgetTester tester) async {
+    // Build the WeatherPage widget and trigger a frame.
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: WeatherPage(), // WeatherPage as the home widget
+      ),
+    );
 
-    // Verify that the main elements are present.
-    expect(find.text('Weather'), findsOneWidget); // AppBar title
-    expect(find.byType(TextField), findsOneWidget); // City input
-    expect(find.byType(ElevatedButton), findsOneWidget); // Search button
+    // Verify the presence of the AppBar title.
+    expect(find.text('Weather App'), findsOneWidget);
+
+    // Verify that the TextField for city input is present.
+    expect(find.byType(TextField), findsOneWidget);
+
+    // Verify the presence of the search button.
+    expect(find.byType(ElevatedButton), findsOneWidget);
 
     // Simulate entering a city name.
     await tester.enterText(find.byType(TextField), 'Rabat');
@@ -27,7 +33,14 @@ void main() {
     await tester.tap(find.byType(ElevatedButton));
     await tester.pump();
 
-    // Since API calls are asynchronous, we can't verify live data here.
-    // You would need to mock the API response for further testing.
+    // Placeholder: Since API calls are asynchronous, verify loading indicators or placeholders.
+    expect(find.byType(CircularProgressIndicator), findsNothing); // Initially not loading.
+
+    // Placeholder: Mock API responses and validate rendered data.
+    // Use mock data to verify elements like weather data display, country name, etc.
+    // Example: expect(find.text('Temperature: 22°C'), findsOneWidget);
+
+    // Verify no unexpected errors or crashes occurred.
+    expect(tester.takeException(), isNull);
   });
 }

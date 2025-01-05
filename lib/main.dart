@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
-import 'weather_page.dart';
+import 'package:weather_app/pages/calculs.page.dart';
+import 'package:weather_app/pages/home.page.dart';
+import 'package:weather_app/pages/weather.page.dart';
 
-void main() {
-  runApp(const WeatherApp());
-}
 
-class WeatherApp extends StatelessWidget {
-  const WeatherApp({super.key});
+void main() => runApp(const MyApp());
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Weather App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const WeatherPage(),
+      title: 'TP1',
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const MyHomePage(),
+        '/calculs': (context) => const CalculsPage(),
+        '/weather': (context) => const WeatherPage(),
+      },
     );
   }
 }
