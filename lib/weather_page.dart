@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter_svg/flutter_svg.dart';  // Import flutter_svg
+import 'package:flutter_svg/flutter_svg.dart'; // Import flutter_svg
 
 class WeatherPage extends StatefulWidget {
   const WeatherPage({super.key});
@@ -162,73 +162,81 @@ class _WeatherPageState extends State<WeatherPage> {
                           style: const TextStyle(fontSize: 20, color: Colors.red),
                         )
                       else if (_weatherData != null)
-                          Container(
-                            padding: const EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.8),
-                              borderRadius: BorderRadius.circular(10),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.3),
-                                  blurRadius: 8,
-                                  offset: const Offset(0, 5),
-                                ),
-                              ],
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    if (_countryFlag.isNotEmpty)
-                                      SvgPicture.network(
-                                        _countryFlag,
-                                        width: 25,
-                                        height: 20,
-                                      ),
-                                    const SizedBox(width: 10),
-                                    Text(
-                                      'Country: $_countryName',
-                                      style: const TextStyle(
-                                          fontSize: 18, fontWeight: FontWeight.bold),
+                          Center(
+                            child: ConstrainedBox(
+                              constraints: const BoxConstraints(maxWidth: 300),
+                              child: Container(
+                                padding: const EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withOpacity(0.8),
+                                  borderRadius: BorderRadius.circular(10),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.3),
+                                      blurRadius: 8,
+                                      offset: const Offset(0, 5),
                                     ),
                                   ],
                                 ),
-                                const SizedBox(height: 10),
-                                if (_weatherIcon.isNotEmpty)
-                                  Padding(
-                                    padding: const EdgeInsets.only(bottom: 10),
-                                    child: Image.network(
-                                      _weatherIcon,
-                                      height: 80,
-                                      width: 80,
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        if (_countryFlag.isNotEmpty)
+                                          SvgPicture.network(
+                                            _countryFlag,
+                                            width: 25,
+                                            height: 20,
+                                          ),
+                                        const SizedBox(width: 10),
+                                        Text(
+                                          'Country: $_countryName',
+                                          style: const TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ],
                                     ),
-                                  ),
-                                Text(
-                                  'City: ${_weatherData['name']}',
-                                  style: const TextStyle(
-                                      fontSize: 18, fontWeight: FontWeight.bold),
+                                    const SizedBox(height: 10),
+                                    if (_weatherIcon.isNotEmpty)
+                                      Padding(
+                                        padding: const EdgeInsets.only(bottom: 10),
+                                        child: Image.network(
+                                          _weatherIcon,
+                                          height: 80,
+                                          width: 80,
+                                        ),
+                                      ),
+                                    Text(
+                                      'City: ${_weatherData['name']}',
+                                      style: const TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Text(
+                                      'Temperature: ${_weatherData['main']['temp']}°C',
+                                      style: const TextStyle(fontSize: 18),
+                                    ),
+                                    Text(
+                                      'Pressure: ${_weatherData['main']['pressure']} hPa',
+                                      style: const TextStyle(fontSize: 18),
+                                    ),
+                                    Text(
+                                      'Humidity: ${_weatherData['main']['humidity']}%',
+                                      style: const TextStyle(fontSize: 18),
+                                    ),
+                                    const SizedBox(height: 10),
+                                    if (_showGif)
+                                      Image.network(
+                                        'https://docs.flutter.dev/assets/images/dash/dash-fainting.gif',
+                                        height: 80,
+                                      ),
+                                  ],
                                 ),
-                                Text(
-                                  'Temperature: ${_weatherData['main']['temp']}°C',
-                                  style: const TextStyle(fontSize: 18),
-                                ),
-                                Text(
-                                  'Pressure: ${_weatherData['main']['pressure']} hPa',
-                                  style: const TextStyle(fontSize: 18),
-                                ),
-                                Text(
-                                  'Humidity: ${_weatherData['main']['humidity']}%',
-                                  style: const TextStyle(fontSize: 18),
-                                ),
-                                const SizedBox(height: 10),
-                                if (_showGif)
-                                  Image.network(
-                                    'https://docs.flutter.dev/assets/images/dash/dash-fainting.gif',
-                                    height: 80,
-                                  ),
-                              ],
+                              ),
                             ),
                           ),
                     ],
@@ -241,7 +249,10 @@ class _WeatherPageState extends State<WeatherPage> {
               color: Colors.black.withOpacity(0.8),
               child: const Text(
                 'Made by Ayoub Boulidam',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
               ),
             ),
           ],
