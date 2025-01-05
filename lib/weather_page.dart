@@ -66,81 +66,107 @@ class _WeatherPageState extends State<WeatherPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Weather',
-          style: TextStyle(fontSize: 30, color: Colors.red),
+        title: const Text(
+          'Weather App',
+          style: TextStyle(fontSize: 30, color: Colors.white),
         ),
+        backgroundColor: Colors.blueAccent,
       ),
-      body: Center(
-        child: Container(
-          padding: EdgeInsets.all(25),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextField(
-                decoration: InputDecoration(
-                  labelText: "Enter city name",
-                  border: OutlineInputBorder(),
-                  hintText: 'e.g., Rabat',
-                ),
-                onChanged: (value) {
-                  _city = value;
-                },
-              ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: _getWeatherData,
-                child: Icon(
-                  Icons.search,
-                  size: 40,
-                ),
-              ),
-              SizedBox(height: 20),
-              _isLoading
-                  ? CircularProgressIndicator()
-                  : _errorMessage.isNotEmpty
-                  ? Text(
-                _errorMessage,
-                style: TextStyle(fontSize: 20, color: Colors.red),
-              )
-                  : _weatherData != null
-                  ? Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'City: ${_weatherData['name']}',
-                    style: TextStyle(fontSize: 20, color: Colors.blue),
-                  ),
-                  Text(
-                    'Country: $_countryName',
-                    style: TextStyle(fontSize: 20, color: Colors.blue),
-                  ),
-                  Text(
-                    'Temperature: ${_weatherData['main']['temp']}°C',
-                    style: TextStyle(fontSize: 20, color: Colors.blue),
-                  ),
-                  Text(
-                    'Pressure: ${_weatherData['main']['pressure']} hPa',
-                    style: TextStyle(fontSize: 20, color: Colors.blue),
-                  ),
-                  Text(
-                    'Humidity: ${_weatherData['main']['humidity']}%',
-                    style: TextStyle(fontSize: 20, color: Colors.blue),
-                  ),
-                  if (_showGif)
-                    Padding(
-                      padding: const EdgeInsets.only(top: 20),
-                      child: Image.network(
-                        'https://docs.flutter.dev/assets/images/dash/dash-fainting.gif',
-                        height: 100,
+      body: Column(
+        children: [
+          // Title Section
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20.0),
+            child: Text(
+              'Weather Information',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.blueAccent),
+            ),
+          ),
+
+          // Main Content Section
+          Expanded(
+            child: Center(
+              child: Container(
+                padding: const EdgeInsets.all(25),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    TextField(
+                      decoration: InputDecoration(
+                        labelText: "Enter city name",
+                        border: OutlineInputBorder(),
+                        hintText: 'e.g., Rabat',
+                      ),
+                      onChanged: (value) {
+                        _city = value;
+                      },
+                    ),
+                    const SizedBox(height: 20),
+                    ElevatedButton(
+                      onPressed: _getWeatherData,
+                      child: const Icon(
+                        Icons.search,
+                        size: 40,
                       ),
                     ),
-                ],
-              )
-                  : SizedBox.shrink(),
-            ],
+                    const SizedBox(height: 20),
+                    _isLoading
+                        ? const CircularProgressIndicator()
+                        : _errorMessage.isNotEmpty
+                        ? Text(
+                      _errorMessage,
+                      style: const TextStyle(fontSize: 20, color: Colors.red),
+                    )
+                        : _weatherData != null
+                        ? Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'City: ${_weatherData['name']}',
+                          style: const TextStyle(fontSize: 20, color: Colors.blue),
+                        ),
+                        Text(
+                          'Country: $_countryName',
+                          style: const TextStyle(fontSize: 20, color: Colors.blue),
+                        ),
+                        Text(
+                          'Temperature: ${_weatherData['main']['temp']}°C',
+                          style: const TextStyle(fontSize: 20, color: Colors.blue),
+                        ),
+                        Text(
+                          'Pressure: ${_weatherData['main']['pressure']} hPa',
+                          style: const TextStyle(fontSize: 20, color: Colors.blue),
+                        ),
+                        Text(
+                          'Humidity: ${_weatherData['main']['humidity']}%',
+                          style: const TextStyle(fontSize: 20, color: Colors.blue),
+                        ),
+                        if (_showGif)
+                          Padding(
+                            padding: const EdgeInsets.only(top: 20),
+                            child: Image.network(
+                              'https://docs.flutter.dev/assets/images/dash/dash-fainting.gif',
+                              height: 100,
+                            ),
+                          ),
+                      ],
+                    )
+                        : const SizedBox.shrink(),
+                  ],
+                ),
+              ),
+            ),
           ),
-        ),
+
+          // Footer Section
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10.0),
+            child: Text(
+              'Made by Ayoub Boulidam',
+              style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic, color: Colors.grey[700]),
+            ),
+          ),
+        ],
       ),
     );
   }
