@@ -1,16 +1,18 @@
-# weather_app
+# Academic Project: Weather and Calculator App with Flutter
 
-A new Flutter project.
+This project, part of our academic studies, is developed using **Flutter**, a versatile cross-platform framework. The app combines two functionalities: a **Weather App** and a **Calculator**, with seamless routing and navigation between screens.
 
-## Getting Started
+The **Weather App** fetches real-time weather data using the **Weather Map API**, showcasing the integration of external APIs into a Flutter project.
 
-This project is a starting point for a Flutter application.
+Below are preview images of the app:
 
-A few resources to get you started if this is your first Flutter project:
+- **Home Screen**  
+  ![Home Screen Preview](home-image.jpg)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- **Weather App Screen**  
+  ![Weather App Preview](weather-image.jpg)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- **Calculator Screen**  
+  ![Calculator Preview](calculator-image.jpg)
+
+
